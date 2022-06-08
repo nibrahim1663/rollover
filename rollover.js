@@ -1,21 +1,32 @@
 "use strict";
 
-document.addEventListener("DOMContentLoaded", () => {
-    const images = document.querySelectorAll("#image_rollovers img");
+const $ = selector => document.querySelector(selector);
+
+
+document.addEventListener("DOMContentLoaded", () => 
+{
+    //const images = document.querySelectorAll("#image_rollovers img");
+    const imgLink = $("#image_rollovers").querySelectorAll("img");
 
     // process each img tag
-    for (let image of images) {
-        const oldURL = image.src;
-        const newURL = image.id;
+    for (let link of imgLink) 
+    {
+        // Grab the original image's SRC and assign it to originalImage variable
+        const originalImage = link.src; 
+
+        // Grab the rolled over image's SRC and assign it to rolledOverImage variable
+        const rolledOverImage = link.id;
 
         // preload rollover image
+        const image = new Image();
+        image.src = rolledOverImage;
 
         // set up event handlers for hovering an image
-        image.addEventListener("mouseover", () => {
-            image.src = newURL;
+        link.addEventListener("mouseover", () => {
+            link.src = rolledOverImage;
         });
-        image.addEventListener("mouseout", () => {
-            image.src = oldURL;
+        link.addEventListener("mouseout", () => {
+            link.src = originalImage;
         });
     }
 });
